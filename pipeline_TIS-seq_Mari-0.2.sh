@@ -28,71 +28,71 @@ GPAT2="$WD/00_reference/gpat2.tmp"
 ADAPTTOTAL="$WD/00_reference/adapt_total_limpo.txt"
 
 # # M01: separar sequências que possuem mariner
-# mkdir -p $MOSFQ
-# for FASTQ in $FASTQIN/*.fastq;
-# do
-# 	# Grep mos3 and mos5 patterns
-# 	grep -v '>' $REF1 > $GPAT1
-# 	grep -v '>' $REF2 > $GPAT2
-# 	# Grep sequences with mos3 pattern
-# 	grep -f $GPAT1 $FASTQ -B1 -A2 | sed '/^--$/d' > ${FASTQ%.fastq}_mos3.fastq &&
-# 	mv $FASTQIN/*_mos3.fastq $MOSFQ && rm $GPAT1
-# 	# Grep sequences with mos5 pattern
-# 	grep -f $GPAT2 $FASTQ -B1 -A2 | sed '/^--$/d' > ${FASTQ%.fastq}_mos5.fastq &&
-# 	mv $FASTQIN/*_mos5.fastq $MOSFQ && rm $GPAT2
-# done
+mkdir -p $MOSFQ
+for FASTQ in $FASTQIN/*.fastq;
+do
+ 	# Grep mos3 and mos5 patterns
+ 	grep -v '>' $REF1 > $GPAT1
+ 	grep -v '>' $REF2 > $GPAT2
+ 	# Grep sequences with mos3 pattern
+ 	grep -f $GPAT1 $FASTQ -B1 -A2 | sed '/^--$/d' > ${FASTQ%.fastq}_mos3.fastq &&
+ 	mv $FASTQIN/*_mos3.fastq $MOSFQ && rm $GPAT1
+ 	# Grep sequences with mos5 pattern
+ 	grep -f $GPAT2 $FASTQ -B1 -A2 | sed '/^--$/d' > ${FASTQ%.fastq}_mos5.fastq &&
+ 	mv $FASTQIN/*_mos5.fastq $MOSFQ && rm $GPAT2
+done
 # #_______________________________________________________________________________________________________________________________
 
 # # M02: fastq to fasta
-# mkdir -p $MOSFA
-# for FMOSFQ in $MOSFQ/*.fastq;
-# do 
-# 	$FQTOFA -i $FMOSFQ -o ${FMOSFQ%.fastq}."fa" &&
-# 	mv $MOSFQ/*.fa $MOSFA
-# done
+mkdir -p $MOSFA
+for FMOSFQ in $MOSFQ/*.fastq;
+do 
+	$FQTOFA -i $FMOSFQ -o ${FMOSFQ%.fastq}."fa" &&
+ 	mv $MOSFQ/*.fa $MOSFA
+done
 #_______________________________________________________________________________________________________________________________
 
 # #M03: remove mariner and adapters (and "fish" sequence)
-# mkdir -p $CLEANFISH
-# for FMOSFA in $MOSFA/*.fa
-# do
-# 	# Remove mariner and "fish" from mos3
-# 	sed -e "s/TTATTCTAAGTATTTGCCGTCGC.*//;s/AAGTAGGGAATGTCGGTTCG.*//" $FMOSFA > ${FMOSFA%.fa}_clnfs.fa &&
-# 	mv $MOSFA/*clnfs.fa $CLEANFISH
-# done
+mkdir -p $CLEANFISH
+for FMOSFA in $MOSFA/*.fa
+do
+	# Remove mariner and "fish" from mos3
+	sed -e "s/TTATTCTAAGTATTTGCCGTCGC.*//;s/AAGTAGGGAATGTCGGTTCG.*//" $FMOSFA > ${FMOSFA%.fa}_clnfs.fa &&
+	mv $MOSFA/*clnfs.fa $CLEANFISH
+done
 #_______________________________________________________________________________________________________________________________
 
 # # M04: Remove adapters and arctifacts from sequences (NEW)
-# mkdir -p $CLEANADAPT
-# for FCLNFS in $CLEANFISH/*.fa
-# do
-# 	sed -f <(sort -r "$ADAPTTOTAL" | sed 's/.*/s|&||/') $FCLNFS > ${FCLNFS%_clnfs.fa}_"clean.fa" &&
-# 	mv $CLEANFISH/*clean.fa $CLEANADAPT
-# done
-# #_______________________________________________________________________________________________________________________________
+mkdir -p $CLEANADAPT
+for FCLNFS in $CLEANFISH/*.fa
+do
+	sed -f <(sort -r "$ADAPTTOTAL" | sed 's/.*/s|&||/') $FCLNFS > ${FCLNFS%_clnfs.fa}_"clean.fa" &&
+	mv $CLEANFISH/*clean.fa $CLEANADAPT
+done
+#_______________________________________________________________________________________________________________________________
 
 # # M05: blast de uma amostra contra ela mesma
-# mkdir -p $SELFBLAST
-# for CLEANFA in $CLEANADAPT/*_clean.fa
-# do
-# 	$BLAST -query $CLEANFA -subject $CLEANFA -outfmt "7 qseqid sseqid pident length qlen slen evalue bitscore qcovs qstart qend sstart send qseq sseq" -out ${CLEANFA%_clean.fa}_blastout.tsv &&
-# 	mv $CLEANADAPT/*blastout.tsv $SELFBLAST
-# done
+mkdir -p $SELFBLAST
+for CLEANFA in $CLEANADAPT/*_clean.fa
+do
+	$BLAST -query $CLEANFA -subject $CLEANFA -outfmt "7 qseqid sseqid pident length qlen slen evalue bitscore qcovs qstart qend sstart send qseq sseq" -out ${CLEANFA%_clean.fa}_blastout.tsv &&
+	mv $CLEANADAPT/*blastout.tsv $SELFBLAST
+done
 #_______________________________________________________________________________________________________________________________
 
 # #M06: separar arquivos onehit de arquivos multihit 
-# mkdir -p $ONEHIT $MULTIHIT
-# for FSBLAST in $SELFBLAST/*blastout.tsv;
-# do
-# 	# Cria arquivo com sequências com só um hit (elas mesmas)
-# 	grep "# 1 hits found" -A1 $FSBLAST | sed '/^--$/d;/^#/d' > ${FSBLAST%_blastout.tsv}_onehit.tsv &&
-# 	sed -i '1i qseqid\tsseqid\tpident\tlen\tqlen\tslen\tevalue\tbitscore\tqcovs\tqstart\tqend\tsstart\tsend\tqseq\tsseq' ${FSBLAST%_blastout.tsv}_onehit.tsv &&
-# 	mv $SELFBLAST/*onehit.tsv $ONEHIT
-# 	# Cria arquivo com as sequências com mais de um hit
-# 	sed '/# 1 hits found/,+1 d;/^# /d' $FSBLAST > ${FSBLAST%_blastout.tsv}_multihit.tsv &&
-# 	sed -i '1i qseqid\tsseqid\tpident\tlen\tqlen\tslen\tevalue\tbitscore\tqcovs\tqstart\tqend\tsstart\tsend\tqseq\tsseq' ${FSBLAST%_blastout.tsv}_multihit.tsv &&
-# 	mv $SELFBLAST/*multihit.tsv $MULTIHIT	
-# done
+mkdir -p $ONEHIT $MULTIHIT
+for FSBLAST in $SELFBLAST/*blastout.tsv;
+do
+	# Cria arquivo com sequências com só um hit (elas mesmas)
+	grep "# 1 hits found" -A1 $FSBLAST | sed '/^--$/d;/^#/d' > ${FSBLAST%_blastout.tsv}_onehit.tsv &&
+	sed -i '1i qseqid\tsseqid\tpident\tlen\tqlen\tslen\tevalue\tbitscore\tqcovs\tqstart\tqend\tsstart\tsend\tqseq\tsseq' ${FSBLAST%_blastout.tsv}_onehit.tsv &&
+	mv $SELFBLAST/*onehit.tsv $ONEHIT
+	# Cria arquivo com as sequências com mais de um hit
+	sed '/# 1 hits found/,+1 d;/^# /d' $FSBLAST > ${FSBLAST%_blastout.tsv}_multihit.tsv &&
+	sed -i '1i qseqid\tsseqid\tpident\tlen\tqlen\tslen\tevalue\tbitscore\tqcovs\tqstart\tqend\tsstart\tsend\tqseq\tsseq' ${FSBLAST%_blastout.tsv}_multihit.tsv &&
+	mv $SELFBLAST/*multihit.tsv $MULTIHIT	
+done
 #_______________________________________________________________________________________________________________________________
 
 # #M06: remover os hits contra ele mesmo e as repetições AxB ou BxA
