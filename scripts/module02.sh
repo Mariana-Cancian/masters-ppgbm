@@ -20,14 +20,6 @@ checkBlast
 echo -e "## Selfblasting file:"
 ## Create directory
 mkdir -p $SELFBLAST
-
-# if [ ! $BLAST ];then
-#     echo ""
-#     echo "ERROR: blastn not found"
-#     echo "Please, set path to blastn in $FCONFIG"
-#     exit 1
-# fi
-## Iterate over files
 for CLEANFA in $LONGLEN/*length.fa
 do
     checkIfFile $CLEANFA $LONGLEN
