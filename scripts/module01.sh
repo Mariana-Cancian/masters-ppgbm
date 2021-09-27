@@ -91,3 +91,4 @@ do
 	$FCHECKNT $FLONGLEN > ${FLONGLEN%_clean.fa}_length.fa &&
 	mv $CLEANADAPT/*length.fa $LONGLEN
 done && echo -e "## Step 05 done!\n" && sleep 0.2
+#_______________________________________________________________________________________________________________________________
