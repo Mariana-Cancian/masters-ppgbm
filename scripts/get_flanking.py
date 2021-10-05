@@ -30,12 +30,12 @@ with open('gene_white_coords.csv') as tabela:
                 if rflank_down > seq_len:
                     rflank_down = seq_len
                 # Get sequence with flanking regions
-                reversa_up=white.get_seq(contig,rflank_up,rstart,rc=True)
-                reversa_down=white.get_seq(contig,rend,rflank_down,rc=True)
+                anti_senso_up=white.get_seq(contig,rflank_up,rstart,rc=True)
+                anti_senso_down=white.get_seq(contig,rend,rflank_down,rc=True)
                 print(f'>{contig}:{rflank_up}-{rstart}_up_rc')
-                print(reversa_up)
+                print(anti_senso_up)
                 print(f'>{contig}:{rend}-{rflank_down}_down_rc')
-                print(reversa_down)
+                print(anti_senso_down)
             else:
                 # Set flanking coordinates
                 flank_up = sstart - fsize
@@ -45,9 +45,9 @@ with open('gene_white_coords.csv') as tabela:
                 if flank_down > seq_len:
                     flank_down = seq_len
                 # Get sequence with flanking regions
-                direta_up=white.get_seq(contig,flank_up,sstart)
-                direta_down=white.get_seq(contig,send,flank_down)
+                senso_up=white.get_seq(contig,flank_up,sstart)
+                senso_down=white.get_seq(contig,send,flank_down)
                 print(f'>{contig}:{flank_up}-{sstart}_up')
-                print(direta_up)
+                print(senso_up)
                 print(f'>{contig}:{send}-{flank_down}_down')
-                print(direta_down)
+                print(senso_down)
