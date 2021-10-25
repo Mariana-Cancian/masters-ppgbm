@@ -81,13 +81,18 @@ do
 	FID=${FIDSEQ%_length.fa}_ids.txt
 	grep -A1 -f $TMPIDS/${FID#\.\/06_LONGLENGTH\/} $FIDSEQ | sed '/^--$/d' > ${FIDSEQ%_length.fa}_fastafinal.fa &&
 	mv $LONGLEN/*fastafinal.fa $IDSEQ
-done && echo -e "## Step 10 done!\n" && sleep 0.2
+done && echo -e "## Step 11 done!\n" && sleep 0.2
 #---------------------------------------------------------------------------------------------------------------------------------
-## M12: Filter 2 (new redundance clear)
-#mkdir -p $FILTER3
-#for FILT3 in $IDSEQ/*fastafinal.fa
-#do
-#	 $FUNIQ $FILT3 > ${FILT3%.fa}_clean.fa &&
-#	mv $IDSEQ/*clean.fa $FILTER3
-#done
-##---------------------------------------------------------------------------------------------------------------------------------
+# M12: Filter 2 (new redundance clear)
+checkIfDir "$IDSEQ"
+echo -e "\e[01m## Step 12\e[0m"
+echo -e "## Cleaning redudant sequences:"
+mkdir -p $FILTER3
+for FILT3 in $IDSEQ/*fastafinal.fa
+do
+    checkIfFile $FILT3 $IDSEQ
+    echo "   $(basename $FIDSEQ)"
+	$FUNIQ $FILT3 > ${FILT3%.fa}_clean.fa &&
+	mv $IDSEQ/*clean.fa $FILTER3
+done && echo -e "## Step 12 done!\n" && sleep 0.2
+#---------------------------------------------------------------------------------------------------------------------------------
