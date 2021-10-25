@@ -71,7 +71,7 @@ do
     echo "   $(basename $FIDS)"
 	cut -f1 $FIDS | sed "/qseqid/d" | sort | uniq > ${FIDS%_qscov70.tsv}_ids.txt &&
 	mv ${FIDS%_qscov70.tsv}_ids.txt $TMPIDS
-done
+done &&
 # Get sequences
 echo -e "## Retrieving sequences for:"
 for FIDSEQ in $LONGLEN/*_length.fa
