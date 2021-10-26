@@ -9,7 +9,7 @@ arrits() {
 }
 
 display_help() {
-    echo -e "# $0 - Run pipeline modules"
+    echo -e "# $0 - Run full pipeline or by modules."
     echo -e "   # Usage:\n\tbash $0 [argument]"
     echo ""
     echo -e "    # You can run this script without arguments or using one of the following arguments:"
