@@ -1,25 +1,44 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
+arrits() {
+    itens=("$@")
+    for item in ${itens[@]}
+    do
+        bash $item || exit 1
+    done
+}
+
+
+modulos=("scripts/module01.sh" "scripts/module02.sh" "scripts/module03.sh" "scripts/module04.sh")
 ARG=$1
+
 if [ $# -eq 0 ]; then
-    echo "All!"
-else
+    arrits ${modulos[@]}
+else           
     case $ARG in
-        mod1)
-            echo -e "\e[01m### Starting module 01 ###\e[0m"
+        s01)
+            bash ${modulos[0]}
             ;;
-        mod2)
-            echo -e "\e[01m### Starting module 02 ###\e[0m"
+        s02)
+            bash ${modulos[1]}
             ;;
-        mod3)
-            echo -e "\e[01m### Starting module 03 ###\e[0m"
+        s03)
+            bash ${modulos[2]}
             ;;
-        mod4)
-            echo -e "\e[01m### Starting module 04 ###\e[0m"
+        s04)
+            bash ${modulos[3]}
             ;;
-        mod5)
-            echo -e "\e[01m### Starting module 05 ###\e[0m"
+        f02)
+            arrits ${modulos[@]:1}
+            ;;
+        f03)
+            arrits ${modulos[@]:2}
+            ;;
+        -h | --help)
+            echo "Ajuda"
             ;;
         *)
-            echo "Invalid argument."
+            echo "Please, enter a valid argument."
+            echo "Use -h or --help to get available a list of available arguments."
     esac
 fi
