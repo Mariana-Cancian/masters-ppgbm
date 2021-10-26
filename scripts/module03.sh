@@ -14,6 +14,7 @@ fi
 
 # M08: Filter 1 (redundance)
 checkIfDir "$MULTIHIT"
+echo -e "\e[01m### STARTING MODULE 03 ###\e[0m"
 echo -e "\e[01m## Step 08\e[0m"
 echo -e "## Selecting onehit and multihit:"
 mkdir -p $FILTHIT
