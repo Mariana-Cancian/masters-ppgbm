@@ -21,7 +21,7 @@ for MHIT in $MULTIHIT/*multihit.tsv;
 do
     checkIfFile $MHIT $MULTIHIT
     echo "   $(basename $MHIT)"
-	$FRBH $MHIT ${MHIT%_multihit.tsv}_mhit_filt.tsv &&
+	python3 $FRBH $MHIT ${MHIT%_multihit.tsv}_mhit_filt.tsv &&
 	mv $MULTIHIT/*filt.tsv $FILTHIT
 done && echo -e "## Step 08 done!\n" && sleep 0.2
 #_______________________________________________________________________________________________________________________________
@@ -53,7 +53,7 @@ for QSCOV in $SCOV/*scov.tsv
 do
     checkIfFile $QSCOV $SCOV
     echo "   $(basename $QSCOV)"
-    $FQCOV $QSCOV ${QSCOV%_scov.tsv}_qscov70.tsv &&
+    python3 $FQCOV $QSCOV ${QSCOV%_scov.tsv}_qscov70.tsv &&
 	mv $SCOV/*qscov70.tsv $QSCOV70
 done && echo -e "## Step 10 done!\n" && sleep 0.2
 #_______________________________________________________________________________________________________________________________
@@ -92,7 +92,7 @@ for FILT3 in $IDSEQ/*fastafinal.fa
 do
     checkIfFile $FILT3 $IDSEQ
     echo "   $(basename $FIDSEQ)"
-	$FUNIQ $FILT3 > ${FILT3%.fa}_clean.fa &&
+	python3 $FUNIQ $FILT3 > ${FILT3%.fa}_clean.fa &&
 	mv $IDSEQ/*clean.fa $FILTER3
 done && echo -e "## Step 12 done!\n" && sleep 0.2
 #---------------------------------------------------------------------------------------------------------------------------------
