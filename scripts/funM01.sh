@@ -1,4 +1,4 @@
-#!/usr/bin/env
+#!/usr/bin/env bash
 # Pipeline configuration file
 FCONFIG="pipe.conf"
 # Check if configuration file exists
@@ -11,12 +11,20 @@ else
     exit 1
 fi
 #_______________________________________________________________________________________________________________________________
+# Convert fastq to fasta
 step01 () {
-for FMOSFQ in $MOSFQ/*.fastq;
-do
-    checkIfFile $FMOSFQ $MOSFQ
-	  python3 $FQTOFA $FMOSFQ &&
-        mv $MOSFQ/*.fa $MOSFA &&
-        echo "   $(basename $FMOSFQ) converted."
-done
+    INARQ01=$1
+    mkdir -p $MOSFA
+	python3 $FQTOFA $INARQ01 &&
+    mv ${INARQ01%.*}.fa $MOSFA &&
+    echo "   $(basename $INARQ01) converted to fasta."
+}
+
+step02 () {
+    INARQ02=$1
+    INARQ02LEN="${INARQ02%.fa}_length.fa"
+    mkdir -p $LONGLEN
+    echo "   $(basename $INARQ02)"
+    $FCHECKNT $INARQ02 > $INARQ02LEN &&
+    mv $INARQ02LEN $LONGLEN
 }
