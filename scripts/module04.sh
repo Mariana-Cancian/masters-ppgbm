@@ -22,7 +22,8 @@ for FILT in $FILTER3/*clean.fa;
 do
     checkIfFile $FILT $FILTER3
     echo "   $(basename $FILT)"
-	$BLAST -query $r1_159_mos3 -subject $r1_161_mos3 -outfmt "7 qseqid sseqid pident length qlen slen evalue bitscore qcovs qstart qend sstart send qseq sseq" -out $r1_159_161_mos3
+	$BLAST -query $CONTROL -subject $SAMPLE -outfmt "7 qseqid sseqid pident length qlen slen evalue bitscore qcovs qstart qend sstart send qseq sseq" -out $r1_159_161_mos3
+	$BLAST -query $SAMPLE -subject $CONTROL -outfmt "7 qseqid sseqid pident length qlen slen evalue bitscore qcovs qstart qend sstart send qseq sseq" -out $r1_159_161_mos3
  &&
 	mv $FILTER3/*.tsv $SAMPLEBLAST
 done && echo -e "## Step 13 done!\n" && sleep 0.2
