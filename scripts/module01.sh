@@ -33,7 +33,8 @@ do
     # Grep sequences with mos5 pattern
     grep -f $GPAT2 $FASTQ -B1 -A2 | sed '/^--$/d' > ${FASTQ%.fastq}_mos5.fastq &&
     mv $FASTQIN/*_mos5.fastq $MOSFQ && rm $GPAT2
-done && echo -e "## Step 01 done!\n" && sleep 0.2
+done &&
+echo -e "## Step 01 done!\n" && sleep 0.2
 #_______________________________________________________________________________________________________________________________
 
 # M02: fastq to fasta
