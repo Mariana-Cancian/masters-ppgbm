@@ -5,7 +5,7 @@ fsize=2000
 # Read fasta file using pyfaidx
 white=Fasta('umalinha.fasta')
 # Read coordinates files
-with open('gene_white_coords.csv') as tabela:
+with open('gene_white_coords_antiga.csv') as tabela:
     tabela=tabela.readlines()
     for coord in tabela:
         coord=coord.strip()
@@ -30,12 +30,12 @@ with open('gene_white_coords.csv') as tabela:
                 if rflank_down > seq_len:
                     rflank_down = seq_len
                 # Get sequence with flanking regions
-                anti_senso_up=white.get_seq(contig,rflank_up,rstart,rc=True)
-                anti_senso_down=white.get_seq(contig,rend,rflank_down,rc=True)
-                print(f'>{contig}:{rflank_up}-{rstart}_up_rc')
+                anti_senso_up=white.get_seq(contig,rflank_up,rflank_down,rc=True)
+                #anti_senso_down=white.get_seq(contig,rend,rflank_down,rc=True)
+                print(f'>{contig}:{rflank_up}-{rstart}_antisense')
                 print(anti_senso_up)
-                print(f'>{contig}:{rend}-{rflank_down}_down_rc')
-                print(anti_senso_down)
+                #print(f'>{contig}:{rend}-{rflank_down}_down_rc')
+                #print(anti_senso_down)
             else:
                 # Set flanking coordinates
                 flank_up = sstart - fsize
@@ -45,9 +45,9 @@ with open('gene_white_coords.csv') as tabela:
                 if flank_down > seq_len:
                     flank_down = seq_len
                 # Get sequence with flanking regions
-                senso_up=white.get_seq(contig,flank_up,sstart)
-                senso_down=white.get_seq(contig,send,flank_down)
-                print(f'>{contig}:{flank_up}-{sstart}_up')
+                senso_up=white.get_seq(contig,flank_up,flank_down)
+                #senso_down=white.get_seq(contig,send,flank_down)
+                print(f'>{contig}:{flank_up}-{sstart}_sense')
                 print(senso_up)
-                print(f'>{contig}:{send}-{flank_down}_down')
-                print(senso_down)
+                #print(f'>{contig}:{send}-{flank_down}_down')
+                #print(senso_down)
