@@ -13,31 +13,19 @@ else
 fi
 #_______________________________________________________________________________________________________________________________
 
-# M06: Selfblast
+M06: Selfblast
 echo -e "\e[01m### STARTING MODULE 02 ###\e[0m"
 echo -e "\e[01m## Step 03\e[0m"
 echo -e "## Selfblasting file:"
-    step03 "$LONGLEN/$FPCONTROL"_length.fa
-    step03 "$LONGLEN/$FPTREATMENT"_length.fa
+    step03 "$LONGLEN/$FPCONTROL"_length.fa &&
+    step03 "$LONGLEN/$FPTREATMENT"_length.fa &&
 echo -e "## Step 03 done!\n" && sleep 0.2
 #_______________________________________________________________________________________________________________________________
 
-# # M07: separate onehit files from multihit files
-# checkIfDir "$SELFBLAST"
-# echo -e "\e[01m## Step 07\e[0m"
-# echo -e "## Selecting onehit and multihit:"
-# mkdir -p $ONEHIT $MULTIHIT
-# for FSBLAST in $SELFBLAST/*blastout.tsv;
-# do
-#     checkIfFile $FSBLAST $SELFBLAST
-#     echo "   $(basename $FSBLAST)"
-# 	# Cria arquivo com sequências com só um hit (elas mesmas)
-# 	grep "# 1 hits found" -A1 $FSBLAST | sed '/^--$/d;/^#/d' > ${FSBLAST%_blastout.tsv}_onehit.tsv &&
-# 	sed -i '1i qseqid\tsseqid\tpident\tlen\tqlen\tslen\tevalue\tbitscore\tqcovs\tqstart\tqend\tsstart\tsend\tqseq\tsseq' ${FSBLAST%_blastout.tsv}_onehit.tsv &&
-# 	mv $SELFBLAST/*onehit.tsv $ONEHIT
-# 	# Cria arquivo com as sequências com mais de um hit
-# 	sed '/# 1 hits found/,+1 d;/^# /d' $FSBLAST > ${FSBLAST%_blastout.tsv}_multihit.tsv &&
-# 	sed -i '1i qseqid\tsseqid\tpident\tlen\tqlen\tslen\tevalue\tbitscore\tqcovs\tqstart\tqend\tsstart\tsend\tqseq\tsseq' ${FSBLAST%_blastout.tsv}_multihit.tsv &&
-# 	mv $SELFBLAST/*multihit.tsv $MULTIHIT
-# done && echo -e "## Step 07 done!\n" && sleep 0.2
-# #_______________________________________________________________________________________________________________________________
+# M07: separate onehit files from multihit files
+echo -e "\e[01m## Step 07\e[0m"
+echo -e "## Selecting onehit and multihit:"
+    step04 "$SELFBLAST/$FPCONTROL"_blastout.tsv &&
+    step04 "$SELFBLAST/$FPTREATMENT"_blastout.tsv &&
+echo -e "## Step 07 done!\n" && sleep 0.2
+#_______________________________________________________________________________________________________________________________
