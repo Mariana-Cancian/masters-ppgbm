@@ -23,9 +23,9 @@ echo -e "## Step 03 done!\n" && sleep 0.2
 #_______________________________________________________________________________________________________________________________
 
 # M07: separate onehit files from multihit files
-echo -e "\e[01m## Step 07\e[0m"
+echo -e "\e[01m## Step 04\e[0m"
 echo -e "## Selecting onehit and multihit:"
     step04 "$SELFBLAST/$FPCONTROL"_blastout.tsv &&
     step04 "$SELFBLAST/$FPTREATMENT"_blastout.tsv &&
-echo -e "## Step 07 done!\n" && sleep 0.2
+echo -e "## Step 04 done!\n" && sleep 0.2
 #_______________________________________________________________________________________________________________________________
