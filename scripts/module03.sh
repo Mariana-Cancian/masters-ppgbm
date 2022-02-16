@@ -13,7 +13,7 @@ else
 fi
 #_______________________________________________________________________________________________________________________________
 
-# M08: Filter 1 (redundance)
+M08: Filter 1 (redundance)
 echo -e "\e[01m### STARTING MODULE 03 ###\e[0m"
 echo -e "\e[01m## Step 05\e[0m"
 echo -e "## Selecting onehit and multihit:"
@@ -22,23 +22,13 @@ echo -e "## Selecting onehit and multihit:"
 echo -e "## Step 05 done!\n" && sleep 0.2
 #_______________________________________________________________________________________________________________________________
 
-# # M09: scov table creation
-# checkIfDir "$FILTHIT"
-# echo -e "\e[01m## Step 09\e[0m"
-# echo -e "## Creating scov column:"
-# mkdir -p $SCOV
-# for FSCOV in $FILTHIT/*filt.tsv;
-# do
-#     checkIfFile $FSCOV $FILTHIT
-#     echo "   $(basename $FSCOV)"
-#     sed '1d' $FSCOV |
-# 	awk '{$16=int(($4/$6)*100)}1' |
-# 	sed '1i qseqid\tsseqid\tpident\tlen\tqlen\tslen\tevalue\tbitscore\tqcovs\tqstart\tqend\tsstart\tsend\tqseq\tsseq\tscov' |
-# 	awk '{ print $1,$2,$3,$4,$5,$6,$7,$8,$9,$16,$10,$11,$12,$13,$14,$15 }' |
-# 	sed 's/ /\t/g' > ${FSCOV%_mhit_filt.tsv}_scov.tsv &&
-# 	mv $FILTHIT/*scov.tsv $SCOV
-# done && echo -e "## Step 09 done!\n" && sleep 0.2
-# # _______________________________________________________________________________________________________________________________
+# M09: scov table creation
+echo -e "\e[01m## Step 06\e[0m"
+echo -e "## Creating scov column:"
+  step06 "$FILTHIT/$FPCONTROL"_mhit_filt.tsv &&
+  step06 "$FILTHIT/$FPTREATMENT"_mhit_filt.tsv &&
+echo -e "## Step 06 done!\n" && sleep 0.2
+# _______________________________________________________________________________________________________________________________
 #
 # # M10: get a representative sequence (q/scov>=70)
 # checkIfDir "$SCOV"
