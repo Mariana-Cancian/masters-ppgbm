@@ -13,7 +13,7 @@ else
 fi
 #_______________________________________________________________________________________________________________________________
 
-M08: Filter 1 (redundance)
+# M08: Filter 1 (redundance)
 echo -e "\e[01m### STARTING MODULE 03 ###\e[0m"
 echo -e "\e[01m## Step 05\e[0m"
 echo -e "## Selecting onehit and multihit:"
@@ -29,20 +29,14 @@ echo -e "## Creating scov column:"
   step06 "$FILTHIT/$FPTREATMENT"_mhit_filt.tsv &&
 echo -e "## Step 06 done!\n" && sleep 0.2
 # _______________________________________________________________________________________________________________________________
-#
-# # M10: get a representative sequence (q/scov>=70)
-# checkIfDir "$SCOV"
-# echo -e "\e[01m## Step 10\e[0m"
-# echo -e "## Filtering by scov:"
-# mkdir -p $QSCOV70
-# for QSCOV in $SCOV/*scov.tsv
-# do
-#     checkIfFile $QSCOV $SCOV
-#     echo "   $(basename $QSCOV)"
-#     python3 $FQCOV $QSCOV ${QSCOV%_scov.tsv}_qscov70.tsv &&
-# 	mv $SCOV/*qscov70.tsv $QSCOV70
-# done && echo -e "## Step 10 done!\n" && sleep 0.2
-# #_______________________________________________________________________________________________________________________________
+
+# M10: get a representative sequence (q/scov>=70)
+echo -e "\e[01m## Step 07\e[0m"
+echo -e "## Filtering by scov:"
+  step07 "$SCOV/$FPCONTROL"_scov.tsv &&
+  step07 "$SCOV/$FPTREATMENT"_scov.tsv &&
+echo -e "## Step 07 done!\n" && sleep 0.2
+#_______________________________________________________________________________________________________________________________
 #
 # # M11: get sequences from list of ids
 # checkIfDir "$QSCOV70"
