@@ -15,7 +15,7 @@ fi
 step01 () {
     INARQ01=$1
     mkdir -p $MOSFA
-	python3 $FQTOFA $INARQ01 &&
+	  python3 $FQTOFA $INARQ01 &&
     mv ${INARQ01%.*}.fa $MOSFA &&
     echo "   $(basename $INARQ01) converted to fasta."
 }

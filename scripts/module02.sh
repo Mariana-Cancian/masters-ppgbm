@@ -6,6 +6,7 @@ if [ -e $FCONFIG ] && [ -e $FFUNCS ]
 then
     source $FCONFIG
     source $FFUNCS
+    source $FFUNM02
 else
     echo "Missing $FCONFIG and/or $FFUNCS"
     exit 1
