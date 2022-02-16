@@ -11,3 +11,12 @@ else
     exit 1
 fi
 #_______________________________________________________________________________________________________________________________
+
+step05 () {
+  INARQ05=$1
+  mkdir -p $FILTHIT
+  #for MHIT in $MULTIHIT/*multihit.tsv;
+  echo "   $(basename $INARQ05)"
+  python3 $FRBH $INARQ05 ${INARQ05%_multihit.tsv}_mhit_filt.tsv &&
+  mv $MULTIHIT/*filt.tsv $FILTHIT
+}
