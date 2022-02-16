@@ -22,13 +22,10 @@ echo -e "## Step 01 done!\n" && sleep 0.2
 #_______________________________________________________________________________________________________________________________
 
 # M02 remove <25nt
-FPCONTROL="$(basename ${CONTROL%.*}.fa)"
-FPTREATMENT="$(basename ${TREATMENT%.*}.fa)"
-
 echo -e "\e[01m## Step 02\e[0m"
 echo -e "## Removing short sequences from:"
-    step02 "$MOSFA/$FPCONTROL"
-    step02 "$MOSFA/$FPTREATMENT"
+    step02 "$MOSFA/$FPCONTROL.fa"
+    step02 "$MOSFA/$FPTREATMENT.fa"
 echo -e "## Step 02 done!\n" && sleep 0.2
 #_______________________________________________________________________________________________________________________________
 
