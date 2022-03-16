@@ -6,6 +6,7 @@ if [ -e $FCONFIG ] && [ -e $FFUNCS ]
 then
     source $FCONFIG
     source $FFUNCS
+    source $FFUNM04
 else
     echo "Missing $FCONFIG and/or $FFUNCS"
     exit 1
@@ -36,4 +37,3 @@ echo -e "## Running reciprocal blast filtering:"
 mkdir -p $RBHBLAST
 
 python2 M15_rbh.py $RBH_CT $RBH_TC 1 2 10 high $RBH_RES
-
