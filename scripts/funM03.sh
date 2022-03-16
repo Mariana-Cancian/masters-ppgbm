@@ -56,3 +56,11 @@ step08.2 () {
   grep -A1 -f $TMPIDS/${FID#\.\/06_LONGLENGTH\/} $INARQ082 | sed '/^--$/d' > ${INARQ082%_length.fa}_fastafinal.fa &&
   mv $LONGLEN/*fastafinal.fa $IDSEQ
 }
+
+step09 () {
+  INARQ09=$1
+  mkdir -p $FILTER3
+  echo "   $(basename $INARQ09)"
+  python3 $FUNIQ $INARQ09 > ${INARQ09%.fa}_clean.fa &&
+  mv $IDSEQ/*clean.fa $FILTER3
+}

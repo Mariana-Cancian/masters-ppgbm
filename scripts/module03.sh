@@ -49,17 +49,12 @@ echo -e "## Retrieving sequences for:"
   step08.2 "$LONGLEN/$FPCONTROL"_length.fa &&
   step08.2 "$LONGLEN/$FPTREATMENT"_length.fa &&
 echo -e "## Step 08 done!\n" && sleep 0.2
-# #---------------------------------------------------------------------------------------------------------------------------------
-# # M09: Filter 2 (new redundance clear)
-# checkIfDir "$IDSEQ"
-# echo -e "\e[01m## Step 12\e[0m"
-# echo -e "## Cleaning redudant sequences:"
-# mkdir -p $FILTER3
-# for FILT3 in $IDSEQ/*fastafinal.fa
-# do
-#     checkIfFile $FILT3 $IDSEQ
-#     echo "   $(basename $FIDSEQ)"
-# 	python3 $FUNIQ $FILT3 > ${FILT3%.fa}_clean.fa &&
-# 	mv $IDSEQ/*clean.fa $FILTER3
-# done && echo -e "## Step 12 done!\n" && sleep 0.2
+#---------------------------------------------------------------------------------------------------------------------------------
+
+# M09: Filter 2 (new redundance clear)
+echo -e "\e[01m## Step 12\e[0m"
+echo -e "## Cleaning redudant sequences:"
+  step09 "$IDSEQ/$FPCONTROL"_fastafinal.fa &&
+  step09 "$IDSEQ/$FPTREATMENT"_fastafinal.fa &&
+echo -e "## Step 12 done!\n" && sleep 0.2
 # #---------------------------------------------------------------------------------------------------------------------------------
