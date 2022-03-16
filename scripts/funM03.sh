@@ -39,3 +39,20 @@ step07 () {
   python3 $FQCOV $INARQ07 ${INARQ07%_scov.tsv}_qscov70.tsv &&
   mv $SCOV/*qscov70.tsv $QSCOV70
 }
+
+step08.1 () {
+  INARQ081=$1
+  mkdir -p $IDSEQ
+  mkdir -p $TMPIDS
+  echo "   $(basename $INARQ081)"
+  cut -f1 $INARQ081 | sed "/qseqid/d" | sort | uniq > ${INARQ081%_qscov70.tsv}_ids.txt &&
+  mv ${INARQ081%_qscov70.tsv}_ids.txt $TMPIDS
+}
+
+step08.2 () {
+  INARQ082=$1
+  echo "   $(basename $INARQ082)"
+  FID=${INARQ082%_length.fa}_ids.txt
+  grep -A1 -f $TMPIDS/${FID#\.\/06_LONGLENGTH\/} $INARQ082 | sed '/^--$/d' > ${INARQ082%_length.fa}_fastafinal.fa &&
+  mv $LONGLEN/*fastafinal.fa $IDSEQ
+}

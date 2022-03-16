@@ -13,7 +13,7 @@ else
 fi
 #_______________________________________________________________________________________________________________________________
 
-# M08: Filter 1 (redundance)
+# M05: Filter 1 (redundance)
 echo -e "\e[01m### STARTING MODULE 03 ###\e[0m"
 echo -e "\e[01m## Step 05\e[0m"
 echo -e "## Selecting onehit and multihit:"
@@ -22,7 +22,7 @@ echo -e "## Selecting onehit and multihit:"
 echo -e "## Step 05 done!\n" && sleep 0.2
 #_______________________________________________________________________________________________________________________________
 
-# M09: scov table creation
+# M06: scov table creation
 echo -e "\e[01m## Step 06\e[0m"
 echo -e "## Creating scov column:"
   step06 "$FILTHIT/$FPCONTROL"_mhit_filt.tsv &&
@@ -30,40 +30,27 @@ echo -e "## Creating scov column:"
 echo -e "## Step 06 done!\n" && sleep 0.2
 # _______________________________________________________________________________________________________________________________
 
-# M10: get a representative sequence (q/scov>=70)
+# M07: get a representative sequence (q/scov>=70)
 echo -e "\e[01m## Step 07\e[0m"
 echo -e "## Filtering by scov:"
   step07 "$SCOV/$FPCONTROL"_scov.tsv &&
   step07 "$SCOV/$FPTREATMENT"_scov.tsv &&
 echo -e "## Step 07 done!\n" && sleep 0.2
 #_______________________________________________________________________________________________________________________________
-#
-# # M11: get sequences from list of ids
-# checkIfDir "$QSCOV70"
-# echo -e "\e[01m## Step 11\e[0m"
-# mkdir -p $IDSEQ
-# mkdir -p $TMPIDS
-# # Get ids
-# echo -e "## Getting sequence ids for:"
-# for FIDS in $QSCOV70/*qscov70.tsv;
-# do
-#     checkIfFile $FIDS $QSCOV70
-#     echo "   $(basename $FIDS)"
-# 	cut -f1 $FIDS | sed "/qseqid/d" | sort | uniq > ${FIDS%_qscov70.tsv}_ids.txt &&
-# 	mv ${FIDS%_qscov70.tsv}_ids.txt $TMPIDS
-# done &&
-# # Get sequences
-# echo -e "## Retrieving sequences for:"
-# for FIDSEQ in $LONGLEN/*_length.fa
-# do
-#     checkIfFile $FIDSEQ $LONGLEN
-#     echo "   $(basename $FIDSEQ)"
-# 	FID=${FIDSEQ%_length.fa}_ids.txt
-# 	grep -A1 -f $TMPIDS/${FID#\.\/06_LONGLENGTH\/} $FIDSEQ | sed '/^--$/d' > ${FIDSEQ%_length.fa}_fastafinal.fa &&
-# 	mv $LONGLEN/*fastafinal.fa $IDSEQ
-# done && echo -e "## Step 11 done!\n" && sleep 0.2
+
+# M08: get sequences from list of ids
+echo -e "\e[01m## Step 08\e[0m"
+# Get ids
+echo -e "## Getting sequence ids for:"
+  step08.1 "$QSCOV70/$FPCONTROL"_qscov70.tsv &&
+  step08.1 "$QSCOV70/$FPTREATMENT"_qscov70.tsv &&
+# Get sequences
+echo -e "## Retrieving sequences for:"
+  step08.2 "$LONGLEN/$FPCONTROL"_length.fa &&
+  step08.2 "$LONGLEN/$FPTREATMENT"_length.fa &&
+echo -e "## Step 08 done!\n" && sleep 0.2
 # #---------------------------------------------------------------------------------------------------------------------------------
-# # M12: Filter 2 (new redundance clear)
+# # M09: Filter 2 (new redundance clear)
 # checkIfDir "$IDSEQ"
 # echo -e "\e[01m## Step 12\e[0m"
 # echo -e "## Cleaning redudant sequences:"
