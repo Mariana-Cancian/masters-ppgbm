@@ -13,7 +13,7 @@ else
 fi
 #_______________________________________________________________________________________________________________________________
 
-M06: Selfblast
+# M03: Selfblast
 echo -e "\e[01m### STARTING MODULE 02 ###\e[0m"
 echo -e "\e[01m## Step 03\e[0m"
 echo -e "## Selfblasting file:"
@@ -22,7 +22,7 @@ echo -e "## Selfblasting file:"
 echo -e "## Step 03 done!\n" && sleep 0.2
 #_______________________________________________________________________________________________________________________________
 
-# M07: separate onehit files from multihit files
+# M04: separate onehit files from multihit files
 echo -e "\e[01m## Step 04\e[0m"
 echo -e "## Selecting onehit and multihit:"
     step04 "$SELFBLAST/$FPCONTROL"_blastout.tsv &&

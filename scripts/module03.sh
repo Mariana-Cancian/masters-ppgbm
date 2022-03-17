@@ -52,9 +52,9 @@ echo -e "## Step 08 done!\n" && sleep 0.2
 #---------------------------------------------------------------------------------------------------------------------------------
 
 # M09: Filter 2 (new redundance clear)
-echo -e "\e[01m## Step 12\e[0m"
+echo -e "\e[01m## Step 09\e[0m"
 echo -e "## Cleaning redudant sequences:"
   step09 "$IDSEQ/$FPCONTROL"_fastafinal.fa &&
   step09 "$IDSEQ/$FPTREATMENT"_fastafinal.fa &&
-echo -e "## Step 12 done!\n" && sleep 0.2
+echo -e "## Step 09 done!\n" && sleep 0.2
 #---------------------------------------------------------------------------------------------------------------------------------
