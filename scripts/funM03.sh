@@ -53,7 +53,7 @@ step08.2 () {
   INARQ082=$1
   echo "   $(basename $INARQ082)"
   FID=${INARQ082%_length.fa}_ids.txt
-  grep -A1 -f $TMPIDS/${FID#\.\/06_LONGLENGTH\/} $INARQ082 | sed '/^--$/d' > ${INARQ082%_length.fa}_fastafinal.fa &&
+  grep -A1 -f $TMPIDS/${FID#\.\/03_LONGLENGTH\/} $INARQ082 | sed '/^--$/d' > ${INARQ082%_length.fa}_fastafinal.fa &&
   mv $LONGLEN/*fastafinal.fa $IDSEQ
 }
 
