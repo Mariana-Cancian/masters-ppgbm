@@ -13,7 +13,8 @@ else
 fi
 #_______________________________________________________________________________________________________________________________
 
-# M10: Filter 1 (redundance)
+# MODULE 04
+## step 10: Filter 1 (redundance)
 echo -e "\e[01m### STARTING MODULE 04 ###\e[0m"
 echo -e "\e[01m## Step 10\e[0m"
 echo -e "## Running reciprocal blast:"
@@ -22,7 +23,7 @@ echo -e "## Running reciprocal blast:"
 echo -e "## Step 10 done!\n" && sleep 0.2
 #_______________________________________________________________________________________________________________________________
 
-# M11: reciprocal blast
+## step 11: reciprocal blast
 echo -e "\e[01m## Step 11\e[0m"
 echo -e "## Running reciprocal blast filtering..."
   step11 "$SAMPLEBLAST/$RBH_CT" "$SAMPLEBLAST/$RBH_TC" "$SAMPLEBLAST/$RBH_RES" &&
