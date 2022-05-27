@@ -57,6 +57,13 @@ step08.2 () {
   mv $LONGLEN/*fastafinal.fa $IDSEQ
 }
 
+step08.3 () {
+  INARQ083=$1 # single-hit tsv file
+  INARQFF=$2 # fasta final
+  echo "   $(basename $INARQFF)"
+  cut -f1,14 $INARQ083 | sed '1d; s/^/&>/;s/\t/\n/' >> $INARQFF
+}
+
 step09 () {
   INARQ09=$1
   mkdir -p $FILTER3

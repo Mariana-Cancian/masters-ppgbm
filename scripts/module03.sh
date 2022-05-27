@@ -49,6 +49,10 @@ echo -e "## Getting sequence ids for:"
 echo -e "## Retrieving sequences for:"
   step08.2 "$LONGLEN/$FPCONTROL"_length.fa &&
   step08.2 "$LONGLEN/$FPTREATMENT"_length.fa &&
+# Concat singletons
+echo -e "## Concatenating singletons for:"
+  step08.3 "$ONEHIT/$FPCONTROL"_onehit.tsv "$IDSEQ/$FPCONTROL"_fastafinal.fa &&
+  step08.3 "$ONEHIT/$FPTREATMENT"_onehit.tsv "$IDSEQ/$FPTREATMENT"_fastafinal.fa &&
 echo -e "## Step 08 done!\n" && sleep 0.2
 #---------------------------------------------------------------------------------------------------------------------------------
 
