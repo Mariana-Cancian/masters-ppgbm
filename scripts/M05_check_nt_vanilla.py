@@ -34,3 +34,4 @@ try:
                 print(s)
 except FileNotFoundError as e:
     print(e)
+    exit()
