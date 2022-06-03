@@ -1,4 +1,5 @@
 01_FASTQ/*trimmed.fq
+01_FASTQ/*.fa
 02_MOSFQ/
 02_MOSFA/
 03_LONGLENGTH

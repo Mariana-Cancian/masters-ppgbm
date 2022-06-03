@@ -16,7 +16,7 @@ try:
     # Convert
     #print('Converting...')
     SeqIO.convert(FASTQ,'fastq',FASTA,'fasta')
-except IndexError:
+except (IndexError, FileNotFoundError):
     sys.exit("File(s) missing.")
 
 #print('Done!')
