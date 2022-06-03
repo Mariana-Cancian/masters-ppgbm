@@ -31,6 +31,7 @@ checkTrimmer () {
       echo ""
       echo "ERROR: trim_galore not found."
       echo "Please, set path to trim_galore in $FCONFIG"
+      echo "On how to install it, see: https://github.com/FelixKrueger/TrimGalore"
       exit 1
   fi
 }
