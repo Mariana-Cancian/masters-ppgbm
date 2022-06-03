@@ -15,6 +15,7 @@ fi
 prePro () {
     INARQ00=$1
     checkTrimmer
+    checkIfFile $INARQ00
     $TRIMMER --no_report_file --illumina $INARQ00 -o $FASTQIN &&
     echo "   $(basename $INARQ00) trimmed."
 }

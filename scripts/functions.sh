@@ -10,9 +10,8 @@ checkIfDir () {
 # Check if file exists in directory
 checkIfFile () {
     ARQ=$1
-    DIR=$2
     if [ ! -f $ARQ ];then
-        echo "ERROR: $(basename $DIR) is empty."
+        echo "ERROR: $ARQ does not exists."
         exit 1
     fi
 }
