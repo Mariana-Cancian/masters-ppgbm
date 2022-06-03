@@ -11,11 +11,12 @@ except ModuleNotFoundError:
 try:
 # Input (fastq file)
     FASTQ=sys.argv[1]
+    FASTA=os.path.splitext(FASTQ)[0]
+    FASTA=f'{FASTA}.fa'
+    # Convert
+    #print('Converting...')
+    SeqIO.convert(FASTQ,'fastq',FASTA,'fasta')
 except IndexError:
     sys.exit("File(s) missing.")
-FASTA=os.path.splitext(FASTQ)[0]
-FASTA=f'{FASTA}.fa'
-# Convert
-#print('Converting...')
-SeqIO.convert(FASTQ,'fastq',FASTA,'fasta')
+
 #print('Done!')
