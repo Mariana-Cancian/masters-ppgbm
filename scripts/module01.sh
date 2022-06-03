@@ -27,7 +27,7 @@ echo -e "\e[01m## Step 01\e[0m"
     step01 "${TREATMENT%.*}_trimmed.fq" &&
 echo -e "## Step 01 done!\n" && sleep 0.2
 #_______________________________________________________________________________________________________________________________
-echo "$MOSFA/$FPCONTROL"
+
 ## step 02: remove <25nt
 echo -e "\e[01m## Step 02\e[0m"
 echo -e "## Removing short sequences from:"
