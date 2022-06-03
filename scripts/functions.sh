@@ -25,3 +25,12 @@ checkBlast () {
         exit 1
     fi
 }
+# Check if trim_galore is in path
+checkTrimmer () {
+    if [ ! $TRIMMER ];then
+      echo ""
+      echo "ERROR: trim_galore not found."
+      echo "Please, set path to trim_galore in $FCONFIG"
+      exit 1
+  fi
+}

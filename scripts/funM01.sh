@@ -11,6 +11,14 @@ else
     exit 1
 fi
 #_______________________________________________________________________________________________________________________________
+# Run sequence trimming
+prePro () {
+    INARQ00=$1
+    checkTrimmer
+    $TRIMMER --no_report_file --illumina $INARQ00 -o $FASTQIN &&
+    echo "   $(basename $INARQ00) trimmed."
+}
+
 # Convert fastq to fasta
 step01 () {
     INARQ01=$1
@@ -22,7 +30,7 @@ step01 () {
 
 step02 () {
     INARQ02=$1
-    INARQ02LEN="${INARQ02%.fa}_length.fa"
+    INARQ02LEN="${INARQ02%trimmed.fa}length.fa"
     mkdir -p $LONGLEN
     echo "   $(basename $INARQ02)"
     $FCHECKNT $INARQ02 > $INARQ02LEN &&
